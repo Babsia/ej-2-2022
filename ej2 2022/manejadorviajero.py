@@ -12,13 +12,20 @@ class manejador:
             viajero=viajeroFrecuente(fila[0],fila[1],fila[2],fila[3],int(fila[4]))
             self.__lista.append(viajero)
     def buscar(self,num):
-        for i in range(len(self.__lista)):
-            if (self.__lista[i].getnum()==num):
-                return self.__lista[i]
+        i = 0
+        while (i < len(self.__lista) and self.__lista[i].getnum() != num):
+            i += 1
+        if i == len(self.__lista):
+            i = -1
+        return i
     def consultarmillas(self,num):
-        return self.buscar(num).getmillas()
+        i=self.buscar(num)
+        valor=None
+        if i != -1:
+           valor=self.__lista[i].getmillas() 
+        return valor
     def acumular(self,num,millas):
-        return self.buscar(num).acumularmillas(millas)
+        return self.__lista[self.buscar(num)].acumularmillas(millas)
     def canjear(self,num,millasc):
-        return self.buscar(num).canje(millasc)
+        return self.__lista[self.buscar(num)].canje(millasc)
         
